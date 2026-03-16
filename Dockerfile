@@ -11,10 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV STREAMLIT_SERVER_PORT=8501
-ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
-ENV STREAMLIT_SERVER_HEADLESS=true
-ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+RUN mkdir -p /app/.streamlit && echo '[server]\nport = 8501\naddress = "0.0.0.0"\nheadless = true\n\n[browser]\ngatherUsageStats = false' > /app/.streamlit/config.toml
 
 EXPOSE 8501
 
