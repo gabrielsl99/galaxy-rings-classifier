@@ -11,8 +11,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p /app/.streamlit && echo '[server]\nport = 8501\naddress = "0.0.0.0"\nheadless = true\n\n[browser]\ngatherUsageStats = false' > /app/.streamlit/config.toml
-
 EXPOSE 8501
 
-CMD ["streamlit", "run", "app.py"]
+CMD sh -c "unset STREAMLIT_SERVER_PORT && streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true --browser.gatherUsageStats=false"
